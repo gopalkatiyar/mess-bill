@@ -25,9 +25,27 @@ connection.connect((err) => {
   console.log("Connected to MySQL database");
 });
 
-// Route to handle the incoming JSON data from the frontend
+app.get("/api/data", (req, res) => {
+	const roomNo = req.query.roomNo;
+
+	const sql = "SELECT * FROM users WHERE RoomNo = ?";
+	connection.query(sql, [roomNo], (err, results) => {
+		if (err) {
+			console.error("Error fetching data:", err);
+			return res.status(500).send("Error fetching data");
+		}
+
+		if (results.length === 0) {
+			return res.status(404).send("No data found for the given room number");
+		}
+		console.log(results);
+		res.json(results);
+	});
+});
+
+
 app.post("/upload", (req, res) => {
-  const data = req.body; // This is the parsed JSON data from the frontend
+  const data = req.body;
 
   // Assuming data is already an array of rows
   const dataToInsert = Array.isArray(data) ? data.slice(1) : []; // Neglect the first row

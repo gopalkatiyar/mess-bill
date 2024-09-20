@@ -2,7 +2,8 @@ import { useState } from "react";
 import * as XLSX from "xlsx";
 
 const ExcelUploader = () => {
-  const [file, setFile] = useState(null);
+	const [file, setFile] = useState(null);
+	const [upload, setupload] = useState(false)
   const [jsonData, setJsonData] = useState([]);
 
   const handleFileChange = (event) => {
@@ -39,24 +40,39 @@ const ExcelUploader = () => {
         },
         body: JSON.stringify(jsonObj),
       })
-        .then((response) => response.json())
-        .then((data) => console.log("Data sent successfully:", data))
+		  .then((response) => {
+			  setupload(true);
+			response.json();
+		})
+		  .then((data) => {
+			  console.log("Data sent successfully:", data);
+		})
         .catch((error) => console.error("Error sending data:", error));
     };
 
     reader.readAsArrayBuffer(file);
   };
 
-  return (
-    <div>
-      <h2>Upload Excel File</h2>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleFileUpload}>Upload</button>
+return (
+	<div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+		<h2 className="text-2xl font-bold mb-4">Upload Excel File</h2>
+		<input
+			type="file"
+			onChange={handleFileChange}
+			className="mb-4 p-2 border border-gray-300 rounded"
+		/>
+		<button
+			onClick={handleFileUpload}
+			className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+		>
+			Upload
+		</button>
+		{upload && <h1>Uploaded Successfully</h1>}
 
-      {/* Display parsed JSON data for demo */}
-      <pre>{JSON.stringify(jsonData, null, 2)}</pre>
-    </div>
-  );
+		{/* Display parsed JSON data for demo */}
+		{/* <pre>{JSON.stringify(jsonData, null, 2)}</pre> */}
+	</div>
+);
 };
 
 export default ExcelUploader;
