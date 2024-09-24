@@ -1,15 +1,18 @@
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { ok, setData, setRoomNo } from "./redux/dataSlice";
+
 
 const Check = () => {
 //   const [data, setData] = useState([]);
-//   const [loading, setLoading] = useState(true);
-	//   const [error, setError] = useState(null);
-	
-  const [roomNo, setroomNo] = useState(null);
+		const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const roomNo = useSelector((state) => state.data.roomNo);
+			const dispatch = useDispatch();
 
   const onChangeHandler = (e) => {
-    setroomNo(e.target.value);
+       dispatch(setRoomNo(e.target.value));
   };
 
   // function handleInputErrors({
@@ -29,7 +32,8 @@ const Check = () => {
       const response = await axios.get(
         `http://localhost:3000/api/data?roomNo=${roomNo}`
       );
-      setData(response.data);
+		dispatch(setData(response.data));
+		dispatch(ok());
 
     } catch (err) {
       setError(err);
@@ -65,3 +69,4 @@ const Check = () => {
 };
 
 export default Check;
+

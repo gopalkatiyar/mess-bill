@@ -80,6 +80,25 @@ app.post("/upload", (req, res) => {
     );
   }
 
+		 
+
+    //   const sql = `UPDATE users 
+	// 						SET Namee = ?, RoomNo = ?, Extra = ?, offPt = ?, offRs = ?, Main = ?, Bill = ?, Diposit = ?, Balance = ? 
+	// 						WHERE SrNo = ?`;
+
+    //   connection.query(
+    //     sql,
+    //     [Name, RoomNo, Extra, offPt, offRs, Main, Bill, Deposit, Balance, SrNo],
+    //     (err, results) => {
+    //       if (err) {
+    //         console.error("Error updating data:", err);
+    //         return res.status(500).send("Error updating data");
+    //       }
+    //       res.status(200).send("Data updated successfully");
+    //     }
+	// );
+	
+
   res.send("Data inserted successfully");
 });
 
