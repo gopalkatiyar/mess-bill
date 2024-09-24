@@ -30,7 +30,7 @@ const Check = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/data?roomNo=${roomNo}`
+        `http://localhost:3000/api/dataroute/data?roomNo=${roomNo}`
       );
 		dispatch(setData(response.data));
 		dispatch(ok());

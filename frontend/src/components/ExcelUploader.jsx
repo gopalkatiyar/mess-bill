@@ -33,7 +33,7 @@ const ExcelUploader = () => {
       console.log(jsonObj);
       console.log(JSON.stringify(jsonObj));
       // Send JSON data to the server
-      fetch("http://localhost:3000/upload", {
+      fetch("http://localhost:3000/api/uploadroute/upload", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

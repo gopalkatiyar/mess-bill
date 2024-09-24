@@ -54,6 +54,14 @@ const DataCard = () => {
                 {personData.Balance}
               </p>
             </div>
+            <div  className="text-bold text-xl my-4 text-center">
+
+              
+              <p className="text-2xl">
+                <span className="font-bold">Your Bill:</span>
+                {personData.Bill}
+              </p>
+            </div>
           </div>
         </div>
       )}
